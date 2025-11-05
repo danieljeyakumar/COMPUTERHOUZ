@@ -38,22 +38,39 @@
         transform: translateY(0);
       }
 
-      /* HOTLINE slide + smooth pulse */
+      /* HOTLINE floating above image + pulse */
       #hotline {
-        transform: translateY(-100%);
+        position: absolute;
+        top: -1.5rem; /* slightly above image */
+        left: 50%;
+        transform: translateX(-50%);
         opacity: 0;
-        transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.5s ease;
+        transition: transform 0.5s ease, opacity 0.5s ease;
+        z-index: 10;
+        background-color: #06b6d4; /* bg-cyan-500 */
+        color: white;
+        padding: 0.5rem 1rem;
+        font-weight: 600;
+        border-radius: 0.375rem;
+        text-align: center;
       }
       #hotline.visible {
-        transform: translateY(0);
         opacity: 1;
-        animation: pulse 4s infinite alternate;
+        animation: pulseFloat 4s infinite alternate;
       }
 
-      @keyframes pulse {
-        0% { transform: translateY(0) scale(1); }
-        50% { transform: translateY(0) scale(1.015); }
-        100% { transform: translateY(0) scale(1); }
+      @keyframes pulseFloat {
+        0% { transform: translateX(-50%) translateY(0) scale(1); }
+        25% { transform: translateX(-50%) translateY(-3px) scale(1.01); }
+        50% { transform: translateX(-50%) translateY(0) scale(1.015); }
+        75% { transform: translateX(-50%) translateY(3px) scale(1.01); }
+        100% { transform: translateX(-50%) translateY(0) scale(1); }
+      }
+
+      @media (max-width: 768px) {
+        #hotline {
+          top: -1rem; /* smaller offset on smaller screens */
+        }
       }
 
       /* Slightly smaller header on scroll */
@@ -68,10 +85,6 @@
   </head>
 
   <body class="bg-white text-neutral-900">
-    <!-- HOTLINE -->
-    <div id="hotline" class="bg-cyan-500 text-white text-center py-2 px-4 text-sm font-semibold sm:text-base sm:py-3 sm:px-6 sticky top-0 z-50">
-      HOTLINE : ‪+6019 330 2841
-    </div>
 
     <!-- HEADER -->
     <header class="bg-neutral-900 text-white sticky top-0 z-40 shadow-sm">
@@ -95,7 +108,7 @@
     </header>
 
     <!-- HERO -->
-    <section class="bg-gradient-to-r from-neutral-900 via-neutral-800 to-neutral-900 text-white">
+    <section class="bg-gradient-to-r from-neutral-900 via-neutral-800 to-neutral-900 text-white relative">
       <div class="max-w-6xl mx-auto px-6 py-20 flex flex-col md:flex-row items-center gap-10">
         <div class="flex-1 fade-in">
           <h2 class="text-4xl md:text-5xl font-bold leading-tight">
@@ -112,8 +125,12 @@
             Open: Mon–Fri 9:30am–6:30pm | Closed on weekends | Walk-ins welcome
           </div>
         </div>
-        <div class="flex-1 fade-in">
-          <div class="rounded-lg overflow-hidden shadow-xl">
+        <div class="flex-1 fade-in relative">
+          <!-- HOTLINE floating overlay -->
+          <div id="hotline">
+            HOTLINE : ‪+6019 330 2841
+          </div>
+          <div class="rounded-lg overflow-hidden shadow-xl relative">
             <img src="images/shopfront.jpg" alt="Computer shop front" class="w-full h-64 object-cover" />
           </div>
         </div>
@@ -249,21 +266,21 @@
         });
       });
 
-      // HOTLINE slide + pulse on scroll
-      let lastScroll = 0;
+      // HOTLINE floating and scroll behavior
       const hotline = document.getElementById('hotline');
-      const header = document.querySelector('header');
+      let lastScroll = 0;
       window.addEventListener('scroll', () => {
         const currentScroll = window.pageYOffset;
         if (currentScroll > lastScroll && currentScroll > 50) {
-          hotline.classList.remove('visible');
-          header.classList.add('shrink');
+          hotline.style.transform = 'translateX(-50%) translateY(-150%)';
+          hotline.style.opacity = '0';
         } else {
-          hotline.classList.add('visible');
-          header.classList.remove('shrink');
+          hotline.style.transform = 'translateX(-50%) translateY(0)';
+          hotline.style.opacity = '1';
         }
         lastScroll = currentScroll;
       });
+      window.addEventListener('load', () => hotline.classList.add('visible'));
 
       // Formspree submission
       const form = document.getElementById('contactForm');
@@ -287,9 +304,6 @@
           alert('Oops! There was a problem sending your message.');
         });
       });
-
-      // Initial HOTLINE visible
-      window.addEventListener('load', () => hotline.classList.add('visible'));
     </script>
   </body>
 </html>
