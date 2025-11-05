@@ -27,6 +27,7 @@
       html {
         scroll-behavior: smooth;
       }
+
       .fade-in {
         opacity: 0;
         transform: translateY(10px);
@@ -36,10 +37,42 @@
         opacity: 1;
         transform: translateY(0);
       }
+
+      /* HOTLINE slide + smooth pulse */
+      #hotline {
+        transform: translateY(-100%);
+        opacity: 0;
+        transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.5s ease;
+      }
+      #hotline.visible {
+        transform: translateY(0);
+        opacity: 1;
+        animation: pulse 4s infinite alternate; /* slower, smoother pulse */
+      }
+
+      @keyframes pulse {
+        0% { transform: translateY(0) scale(1); }
+        50% { transform: translateY(0) scale(1.015); }
+        100% { transform: translateY(0) scale(1); }
+      }
+
+      /* Slightly smaller header on scroll */
+      header {
+        transition: padding 0.3s ease;
+      }
+      header.shrink {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+      }
     </style>
   </head>
 
   <body class="bg-white text-neutral-900">
+    <!-- HOTLINE -->
+    <div id="hotline" class="bg-cyan-500 text-white text-center py-2 px-4 text-sm font-semibold sm:text-base sm:py-3 sm:px-6 sticky top-0 z-50">
+      HOTLINE : ‪+6019 330 2841
+    </div>
+
     <!-- HEADER -->
     <header class="bg-neutral-900 text-white sticky top-0 z-40 shadow-sm">
       <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -148,16 +181,13 @@
             <p>Email: computerhouz@gmail.com</p>
           </div>
         </div>
-        <form id="contactForm" class="bg-white p-6 rounded shadow" action="https://formspree.io/f/movpvgwd" method="POST">
+        <form id="contactForm" class="bg-white p-6 rounded shadow" action="https://formspree.io/f/yourFormID" method="POST">
           <label class="block text-sm">Name</label>
           <input name="name" required class="w-full border rounded px-3 py-2 mt-1" />
-          
           <label class="block text-sm mt-3">Email</label>
           <input name="email" type="email" required class="w-full border rounded px-3 py-2 mt-1" />
-          
           <label class="block text-sm mt-3">Message</label>
           <textarea name="message" rows="4" required class="w-full border rounded px-3 py-2 mt-1"></textarea>
-          
           <div class="mt-4 text-right">
             <button type="submit" class="bg-cyan-500 text-neutral-900 px-4 py-2 rounded">Send message</button>
           </div>
@@ -200,7 +230,7 @@
       });
       document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-      // Smooth scroll with adjustments
+      // Smooth scroll
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
           const targetId = this.getAttribute('href');
@@ -208,25 +238,36 @@
           if (targetEl) {
             e.preventDefault();
             const topPos = targetEl.getBoundingClientRect().top + window.scrollY;
-            
             let offset = 0;
-            if (targetId === "#contact") {
-              offset = 60;
-            } else if (targetId === "#services" || targetId === "#about") {
+            if (targetId === "#contact") offset = 60;
+            else if (targetId === "#services" || targetId === "#about")
               offset = window.innerHeight / 2 - targetEl.offsetHeight / 2;
-            }
-
             window.scrollTo({ top: topPos - offset, behavior: 'smooth' });
           }
         });
       });
 
-      // Formspree submission with alert
+      // HOTLINE slide + pulse on scroll
+      let lastScroll = 0;
+      const hotline = document.getElementById('hotline');
+      const header = document.querySelector('header');
+      window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        if (currentScroll > lastScroll && currentScroll > 50) {
+          hotline.classList.remove('visible');
+          header.classList.add('shrink');
+        } else {
+          hotline.classList.add('visible');
+          header.classList.remove('shrink');
+        }
+        lastScroll = currentScroll;
+      });
+
+      // Formspree submission
       const form = document.getElementById('contactForm');
       form.addEventListener('submit', function(e) {
         e.preventDefault();
         const formData = new FormData(form);
-
         fetch(form.action, {
           method: form.method,
           body: formData,
@@ -244,6 +285,9 @@
           alert('Oops! There was a problem sending your message.');
         });
       });
+
+      // Initial HOTLINE visible
+      window.addEventListener('load', () => hotline.classList.add('visible'));
     </script>
   </body>
 </html>
