@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>COMPUTERHOUZ   Empowering Technology Solutions for Tomorrow</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="images/favicon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon.png">
+
 
     <meta
       name="description"
@@ -41,13 +46,13 @@
       /* HOTLINE floating above image + pulse */
       #hotline {
         position: absolute;
-        top: -1.5rem; /* slightly above image */
+        top: -1.5rem;
         left: 50%;
         transform: translateX(-50%);
         opacity: 0;
         transition: transform 0.5s ease, opacity 0.5s ease;
         z-index: 10;
-        background-color: #06b6d4; /* bg-cyan-500 */
+        background-color: #06b6d4;
         color: white;
         padding: 0.5rem 1rem;
         font-weight: 600;
@@ -69,11 +74,10 @@
 
       @media (max-width: 768px) {
         #hotline {
-          top: -1rem; /* smaller offset on smaller screens */
+          top: -1rem;
         }
       }
 
-      /* Slightly smaller header on scroll */
       header {
         transition: padding 0.3s ease;
       }
@@ -126,7 +130,6 @@
           </div>
         </div>
         <div class="flex-1 fade-in relative">
-          <!-- HOTLINE floating overlay -->
           <div id="hotline">
             HOTLINE : ‪+6019 330 2841
           </div>
@@ -241,7 +244,6 @@
     </footer>
 
     <script>
-      // Fade-in on scroll
       const observer = new IntersectionObserver(entries => {
         entries.forEach(e => {
           if (e.isIntersecting) e.target.classList.add('visible');
@@ -249,7 +251,6 @@
       });
       document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-      // Smooth scroll
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
           const targetId = this.getAttribute('href');
@@ -266,7 +267,6 @@
         });
       });
 
-      // HOTLINE floating and scroll behavior
       const hotline = document.getElementById('hotline');
       let lastScroll = 0;
       window.addEventListener('scroll', () => {
@@ -282,7 +282,6 @@
       });
       window.addEventListener('load', () => hotline.classList.add('visible'));
 
-      // Formspree submission
       const form = document.getElementById('contactForm');
       form.addEventListener('submit', function(e) {
         e.preventDefault();
