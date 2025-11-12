@@ -3,15 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>COMPUTERHOUZ   Empowering Technology Solutions for Tomorrow</title>
     <link rel="icon" type="image/png" href="images/favicon.png" />
 
-    <meta name="description" content="COMPUTERHOUZ provides expert computer sales, repair, and upgrade services. Empowering technology solutions for tomorrow with trusted local support and quality products." />
+    <meta
+      name="description"
+      content="COMPUTERHOUZ provides expert computer sales, repair, and upgrade services. Empowering technology solutions for tomorrow with trusted local support and quality products."
+    />
     <meta property="og:title" content="COMPUTERHOUZ   Empowering Technology Solutions for Tomorrow" />
     <meta property="og:description" content="Your trusted local computer sales and service shop. Repairs, diagnostics, and upgrades with transparent pricing and genuine parts." />
     <meta property="og:image" content="images/shopfront.jpg" />
     <meta property="og:url" content="https://yourdomain.com" />
     <meta property="og:type" content="website" />
+
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="COMPUTERHOUZ   Empowering Technology Solutions for Tomorrow" />
     <meta name="twitter:description" content="Reliable computer sales and repairs. Empowering technology solutions for tomorrow." />
@@ -24,24 +29,17 @@
         scroll-behavior: smooth;
       }
 
-      /* Fade + Slide animation for sections */
       .fade-in {
         opacity: 0;
-        transform: translateY(40px);
-        transition: opacity 1s ease, transform 1s ease;
+        transform: translateY(10px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
       }
       .fade-in.visible {
         opacity: 1;
         transform: translateY(0);
       }
-      .fade-in:nth-child(2n).visible {
-        transition-delay: 0.2s;
-      }
-      .fade-in:nth-child(3n).visible {
-        transition-delay: 0.4s;
-      }
 
-      /* Hotline floating glow */
+      /* HOTLINE floating above image + pulse */
       #hotline {
         position: absolute;
         top: -1.5rem;
@@ -59,8 +57,9 @@
       }
       #hotline.visible {
         opacity: 1;
-        animation: pulseFloat 4s infinite alternate, glow 2s infinite ease-in-out;
+        animation: pulseFloat 4s infinite alternate;
       }
+
       @keyframes pulseFloat {
         0% { transform: translateX(-50%) translateY(0) scale(1); }
         25% { transform: translateX(-50%) translateY(-3px) scale(1.01); }
@@ -68,32 +67,11 @@
         75% { transform: translateX(-50%) translateY(3px) scale(1.01); }
         100% { transform: translateX(-50%) translateY(0) scale(1); }
       }
-      @keyframes glow {
-        0%, 100% { box-shadow: 0 0 10px rgba(6,182,212,0.4); }
-        50% { box-shadow: 0 0 20px rgba(6,182,212,0.8); }
-      }
+
       @media (max-width: 768px) {
-        #hotline { top: -1rem; font-size: 0.9rem; }
-      }
-
-      /* Hero background motion */
-      section.bg-gradient-to-r {
-        background-size: 400% 400%;
-        animation: gradientShift 12s ease infinite;
-      }
-      @keyframes gradientShift {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-      }
-
-      /* Service card hover animation */
-      #services .border {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-      #services .border:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+        #hotline {
+          top: -1rem;
+        }
       }
 
       header {
@@ -107,6 +85,7 @@
   </head>
 
   <body class="bg-white text-neutral-900">
+
     <!-- HEADER -->
     <header class="bg-neutral-900 text-white sticky top-0 z-40 shadow-sm">
       <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -151,7 +130,7 @@
             HOTLINE : ‪+6019 330 2841
           </div>
           <div class="rounded-lg overflow-hidden shadow-xl relative">
-            <img src="images/shopfront.jpg" alt="ComputerHouz storefront in Petaling Jaya" class="w-full h-64 object-cover" loading="lazy" />
+            <img src="images/shopfront.jpg" alt="Computer shop front" class="w-full h-64 object-cover" />
           </div>
         </div>
       </div>
@@ -190,7 +169,7 @@
     <!-- ABOUT -->
     <section id="about" class="py-16 bg-white">
       <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-8 items-center">
-        <div class="fade-in">
+        <div>
           <h3 class="text-2xl font-semibold">About COMPUTERHOUZ</h3>
           <p class="mt-3 text-neutral-600">
             We are a local computer shop focused on honest service and reliable products. Our technicians are certified and we back repairs with a warranty.
@@ -201,8 +180,8 @@
             <li>• Warranty on repairs (terms apply)</li>
           </ul>
         </div>
-        <div class="fade-in">
-          <img src="images/technician.jpg" alt="Technician providing IT service" class="w-full h-72 object-cover rounded-lg shadow" loading="lazy" />
+        <div>
+          <img src="images/technician.jpg" alt="Technician providing IT service" class="w-full h-72 object-cover rounded-lg shadow" />
         </div>
       </div>
     </section>
@@ -210,7 +189,7 @@
     <!-- CONTACT -->
     <section id="contact" class="py-16 bg-neutral-50">
       <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-8">
-        <div class="fade-in">
+        <div>
           <h3 class="text-2xl font-semibold">Get in touch</h3>
           <p class="mt-2 text-neutral-600">Questions about services or need a repair? Send us a message or call the shop.</p>
           <div class="mt-4 text-neutral-700">
@@ -220,7 +199,7 @@
             <p>Email: computerhouz@gmail.com</p>
           </div>
         </div>
-        <form id="contactForm" class="bg-white p-6 rounded shadow fade-in" action="https://formspree.io/f/movpvgwd" method="POST">
+        <form id="contactForm" class="bg-white p-6 rounded shadow" action="https://formspree.io/f/movpvgwd" method="POST">
           <label class="block text-sm">Name</label>
           <input name="name" required class="w-full border rounded px-3 py-2 mt-1" />
           <label class="block text-sm mt-3">Email</label>
@@ -260,14 +239,7 @@
       </div>
     </footer>
 
-    <!-- TOAST NOTIFICATION -->
-    <div id="toast" class="fixed bottom-5 right-5 px-4 py-2 rounded shadow-lg opacity-0 translate-y-10 pointer-events-none transition-all duration-500 flex items-center gap-2 text-white">
-      <span id="toast-icon">✔️</span>
-      <span id="toast-message">Message sent!</span>
-    </div>
-
     <script>
-      // Scroll animations
       const observer = new IntersectionObserver(entries => {
         entries.forEach(e => {
           if (e.isIntersecting) e.target.classList.add('visible');
@@ -275,22 +247,6 @@
       });
       document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-      // Logo reveal
-      window.addEventListener('load', () => {
-        const logo = document.querySelector('header img');
-        logo.style.opacity = 0;
-        logo.style.transform = 'scale(0.8)';
-        setTimeout(() => {
-          logo.style.transition = 'all 1s ease';
-          logo.style.opacity = 1;
-          logo.style.transform = 'scale(1)';
-        }, 300);
-
-        const hotline = document.getElementById('hotline');
-        hotline.classList.add('visible');
-      });
-
-      // Smooth anchor scroll
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
           const targetId = this.getAttribute('href');
@@ -298,12 +254,15 @@
           if (targetEl) {
             e.preventDefault();
             const topPos = targetEl.getBoundingClientRect().top + window.scrollY;
-            window.scrollTo({ top: topPos - 70, behavior: 'smooth' });
+            let offset = 0;
+            if (targetId === "#contact") offset = 60;
+            else if (targetId === "#services" || targetId === "#about")
+              offset = window.innerHeight / 2 - targetEl.offsetHeight / 2;
+            window.scrollTo({ top: topPos - offset, behavior: 'smooth' });
           }
         });
       });
 
-      // Hide hotline on scroll down
       const hotline = document.getElementById('hotline');
       let lastScroll = 0;
       window.addEventListener('scroll', () => {
@@ -317,33 +276,8 @@
         }
         lastScroll = currentScroll;
       });
+      window.addEventListener('load', () => hotline.classList.add('visible'));
 
-      // TOAST NOTIFICATION FUNCTION
-      const toast = document.getElementById('toast');
-      const toastMessage = document.getElementById('toast-message');
-      const toastIcon = document.getElementById('toast-icon');
-
-      function showToast(message, type = 'success') {
-        toastMessage.textContent = message;
-
-        if (type === 'success') {
-          toast.style.backgroundColor = '#06b6d4';
-          toastIcon.textContent = '✔️';
-        } else if (type === 'error') {
-          toast.style.backgroundColor = '#ef4444';
-          toastIcon.textContent = '❌';
-        }
-
-        toast.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
-        toast.classList.add('opacity-100', 'translate-y-0');
-
-        setTimeout(() => {
-          toast.classList.remove('opacity-100', 'translate-y-0');
-          toast.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
-        }, 2500);
-      }
-
-      // Form submit
       const form = document.getElementById('contactForm');
       form.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -355,21 +289,14 @@
         })
         .then(response => {
           if (response.ok) {
-            form.style.transition = 'all 0.5s ease';
-            form.style.transform = 'scale(0.98)';
-            form.style.opacity = '0.7';
-            showToast('Message sent!', 'success');
-            setTimeout(() => form.reset(), 400);
-            setTimeout(() => {
-              form.style.opacity = '1';
-              form.style.transform = 'scale(1)';
-            }, 1000);
+            alert('Message sent!');
+            form.reset();
           } else {
-            showToast('Oops! There was a problem sending your message.', 'error');
+            alert('Oops! There was a problem sending your message.');
           }
         })
         .catch(() => {
-          showToast('Oops! There was a problem sending your message.', 'error');
+          alert('Oops! There was a problem sending your message.');
         });
       });
     </script>
